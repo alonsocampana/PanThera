@@ -18,11 +18,11 @@ torch==2.1.1+cu118
 torchmetrics==0.10.0
 ```
 # Installation 
-For the usage of our package, no particular python package is provided. For the installation of python on different operating systems the instructions can be found in https://www.python.org/downloads/. Once python is installed the required libraries can be installed using the command `pip install -r requirements.txt`.
+For the usage of our package, no particular Python package is provided. For the installation of Python on different operating systems the instructions can be found at https://www.python.org/downloads/. Once Python is installed the required libraries can be installed using the command `pip install -r requirements.txt`. The installation time will greatly depend on the time needed to download and install PyTorch with CUDA support, which could take up to one hour depending on the network being used.
 
 # Generating predictions for Combination Therapies
 
-Predictions can be performed using the command `python3 predict.py --file {your_file.csv} --cuda {your_cuda_device_number}`. `your_file.csv` must contains columns `[SMILES_1, ..., SMILES_N, CONC1	,...,	CONCN, CELL_NAME]`. Where SMILES_X, CONC_X contains the cannonical smiles and concentration of a drug present in the combination therapy, and CELL_NAME contains the name of one of the cell-lines of the NCI60 where the combination therapy will be tested. Each row corresponds to one combination therapy.
+Predictions can be performed using the command `python3 predict.py --file {your_file.csv} --cuda {your_cuda_device_number}`. `your_file.csv` must contains columns `[SMILES_1, ..., SMILES_N, CONC1	,...,	CONCN, CELL_NAME]`. Where SMILES_X, CONC_X contains the canonical smiles and concentration of a drug present in the combination therapy, and CELL_NAME contains the name of one of the cell-lines of the NCI60 where the combination therapy will be tested. Each row corresponds to one combination therapy.
 The output will be stored in {your_file_prediction.csv}, and an additional column, `prediction`, will contain the average predicted inhibitory effect of the ensemble. 
 
 # Software Demo
