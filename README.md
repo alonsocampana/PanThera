@@ -25,7 +25,7 @@ For the usage of our package, no particular Python package is provided. For the 
 # Generating predictions for Combination Therapies
 Predictions can be performed using the command `python3 predict.py --file {your_file.csv} --cuda {your_cuda_device_number}`. `your_file.csv` must contains columns `[SMILES_1, ..., SMILES_N, CONC1	,...,	CONCN, CELL_NAME]`. Where SMILES_X, CONC_X contains the canonical smiles and concentration of a drug present in the combination therapy, and CELL_NAME contains the name of one of the cell-lines of the NCI60 where the combination therapy will be tested. Each row corresponds to one combination therapy.  
 
-The pre-trained models can be downloaded and extracted from `https://zenodo.org/records/14216168`  
+The pre-trained models can be downloaded and extracted from https://zenodo.org/records/14216168  
 
 The output will be stored in {your_file_prediction.csv}, and an additional column, `prediction`, will contain the average predicted inhibitory effect of the ensemble.  
 
@@ -48,7 +48,7 @@ where FILE_NAME denotes the csv file for which the predictions will be generated
 will generate predictions for 2 combination therapies consisting of 4 drugs at different concentrations. The output will be stored in `example_quadruplet_prediction.csv`. The runtime will depend greatly on the characteristics of your system but should be under 1 minute. 
 
 # Training the model from scratch
-The data and optimal hyperparameters can be downloaded `https://zenodo.org/records/14216168` and must be extracted in the app folder.  
+The data and optimal hyperparameters can be downloaded from https://zenodo.org/records/14216168 and must be extracted in the app folder.  
 
 Then the model can be trained using  
 
