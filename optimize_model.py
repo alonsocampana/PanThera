@@ -4,12 +4,19 @@ import optuna
 import uuid
 
 def train_model_optuna(trial, config):
+    """Wrapper function that produces trials using Optuna
+    trial: the instance optuna passes to each trial
+    config: The configuration object"""
     def optuna_step_callback(epoch, train_r):
-        trial.report(train_r, step = epoch)
-        if np.isnan(train_r):
+        """
+        A callback that checks for early stopping at the end of each epoch
+        """
+        trial.report(train_r, step = epoch) # Report the R(synergy) at each epoch
+        if np.isnan(train_r): 
             raise optuna.TrialPruned()
         if trial.should_prune():
             raise optuna.TrialPruned()
+    # Hyperparameters grid used during hyperaprameter search
     config["network"] = { "embed_dim": trial.suggest_int("embed_dim", 64, 1024),
                     "hidden_dim_fusion": trial.suggest_int("hidden_dim_fusion", 64, 2048),
                     "hidden_dim_mlp": trial.suggest_int("hidden_dim_mlp", 64, 2048),
@@ -26,7 +33,7 @@ def train_model_optuna(trial, config):
                                     "batch_size": trial.suggest_categorical("batch_size", [64, 128, 256, 512])}
     try:
         return train_model(config, optuna_step_callback)
-    except Exception as e:
+    except Exception as e: # Error handling, so the hyperparameter optimization does not stop in case a configuration is not valid
         print(e)
         return 0
     
@@ -38,23 +45,33 @@ if __name__ == "__main__":
         required=True,
         help="The partition strategy you want to use."
     )
+
+    parser.add_argument(
+        "--data_path",
+        type=str,
+        required=False,
+        default = "ComboDrugGrowth_Nov2017.csv",
+        help="The path to a data file used to train and test the model (optional, defaults to ALMANAC)"
+    )
+    
     parser.add_argument(
         "--cuda",
         type=int,
         required=True,
         help="The CUDA device to use (an integer)."
     )   
-    
     args= parser.parse_args()
     setting = args.setting
     cuda_device = args.cuda
     config = {"env":{"root": "./data/",
+                "data_path":args.data_path,
                 "setting":setting,
                 "fold":0,
                 "model_name": f"{args.setting}_0hp_{str(uuid.uuid4())}",
-                "device": f"cuda:{cuda_device}" ,}}
+                "device": f"cuda:{cuda_device}",
+                 "num_workers":4,}}
     objective = lambda x: train_model_optuna(x, config)
-    study_name = f"{setting}_0"
+    study_name = f"{setting}_new"
     storage_name = "sqlite:///studies/{}.db".format(study_name)
     study = optuna.create_study(study_name=study_name,
                                 storage=storage_name,
