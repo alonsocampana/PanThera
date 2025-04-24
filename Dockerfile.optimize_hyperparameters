@@ -1,0 +1,9 @@
+FROM panthera_base:latest
+
+ENV SETTING=drug_combination_discovery
+ENV CUDA=0
+
+COPY train_synergy.py .
+COPY optimize_model.py .
+
+CMD python3 optimize_model.py  --cuda "${CUDA}" --setting "${SETTING}"

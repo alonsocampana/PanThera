@@ -1,0 +1,11 @@
+FROM panthera_base:latest
+
+COPY studies/drug_combination_discovery_0.db studies/drug_combination_discovery_0.db
+
+ENV FOLD=0
+ENV CUDA=0
+ENV SETTING=drug_combination_discovery
+ENV DATA_PATH=ComboDrugGrowth_Nov2017.csv
+COPY train_synergy.py .
+
+CMD python3 train_synergy.py --fold "${FOLD}" --cuda "${CUDA}" --setting "${SETTING}" --data_path "${DATA_PATH}"

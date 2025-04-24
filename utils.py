@@ -10,7 +10,7 @@ def return_top(srs):
     top_counts = counts.argsort().argsort()
     return (concs[top_counts <=4], )
 class SynergyDataset():
-    def __init__(self, root = "./data/", training = True):
+    def __init__(self, root = "./data/", training = True,force_reload=False):
         self.training = training
         self.root = root
         data = pd.read_csv(root + "ComboDrugGrowth_Nov2017.csv")
@@ -21,7 +21,7 @@ class SynergyDataset():
         self.grouped = data.dropna().groupby(['NSC1', 'NSC2', 'CELLNAME', "CONC1", "CONC2"])["PERCENTGROWTH", "EXPECTEDGROWTH"].median().drop("EXPECTEDGROWTH", axis=1)
         indexed = self.grouped.reset_index().set_index(["NSC1", "NSC2", "CELLNAME"]).sort_index()
         self.pairs = indexed.index.drop_duplicates().to_numpy()
-        if os.path.exists(root+"ALMANACdrs.pt"):
+        if os.path.exists(root+"ALMANACdrs.pt") & (not force_reload):
             self._load_drs()
         else:
             self._preprocess()
@@ -429,3 +429,4 @@ class EarlyStop():
         else:
             self.patience -= 1
         return not bool(self.patience)
+    

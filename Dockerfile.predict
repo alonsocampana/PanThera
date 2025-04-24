@@ -1,0 +1,9 @@
+FROM panthera_base:latest
+
+COPY studies/drug_combination_discovery_0.db studies/drug_combination_discovery_0.db
+COPY predict.py .
+COPY example_quadruplet.csv .
+COPY models/* models/.
+ENV FILE_NAME=example_quadruplet.csv 
+ENV CUDA=0
+CMD python3 predict.py --file "${FILE_NAME}" --cuda "${CUDA}"

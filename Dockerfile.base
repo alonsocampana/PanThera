@@ -1,0 +1,20 @@
+FROM nvidia/cuda:12.4.1-cudnn-runtime-ubuntu20.04
+RUN apt-get update && apt-get install -y \
+    python3 \
+    python3-pip
+
+WORKDIR /app
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
+COPY src.py .
+COPY utils.py .
+RUN mkdir -p /data
+RUN mkdir -p /studies
+RUN mkdir -p /models
+RUN mkdir -p /results
+COPY data/SMILES_ALMANAC.csv data/SMILES_ALMANAC.csv
+COPY data/nci60toidx.csv data/nci60toidx.csv
+
+
+CMD ["python", "predict.py", "--file", "example_quadruplet.csv", "--cuda", "0"]
