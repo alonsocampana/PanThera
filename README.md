@@ -1,7 +1,7 @@
 Code for the publication "PanThera: Predicting the effect of Combination Therapy using Deep Neural Networks".  
 
 # Overview
-PanThera aims at predicting arbitrary combination therapies. A pre-trained ensemble containing 10 replicas of PanTHera trained on different subsets of the ALMANAC data, and an interface to generate predictions for arbitrary treatments are provided.  
+PanThera aims at predicting arbitrary combination therapies. A pre-trained ensemble containing 10 replicas of PanThera trained on different subsets of the ALMANAC data, and an interface to generate predictions for arbitrary treatments are provided.  
 
 # Requirements
 This package is supported for Windows, macOS and Linux. The package has been tested using Debian GNU/Linux 10 and Ubuntu 20. GPU acceleration with CUDA 12.4 support is required to run our experiments.  
@@ -25,9 +25,9 @@ For the usage of our package, no particular Python package is provided. For the 
 # Generating predictions for Combination Therapies
 Predictions can be performed using the command `python3 predict.py --file {your_file.csv} --cuda {your_cuda_device_number}`. `your_file.csv` must contains columns `[SMILES_1, ..., SMILES_N, CONC1	,...,	CONCN, CELL_NAME]`. Where SMILES_X, CONCX contains the canonical smiles and concentration of a drug present in the combination therapy, and CELL_NAME contains the name of one of the cell-lines of the NCI60 where the combination therapy will be tested. Each row corresponds to one combination therapy.  
 
-The pre-trained models can be downloaded and extracted from https://zenodo.org/records/14216168  
+The pre-trained models can be downloaded and extracted from [Zenodo](/guides/content/editing-an-existing-page#modifying-front-matter](https://zenodo.org/records/14216168)  
 
-The output will be stored in {your_file_prediction.csv}, and an additional column, `prediction`, will contain the average predicted inhibitory effect of the ensemble.  
+The output will be stored in {==your_file_prediction.csv==}, and an additional column, `prediction`, will contain the average predicted inhibitory effect of the ensemble.  
 
 Additionally, it can be ran as a docker image:  
 first the image is built:  
@@ -48,7 +48,7 @@ where FILE_NAME denotes the csv file for which the predictions will be generated
 will generate predictions for 2 combination therapies consisting of 4 drugs at different concentrations. The output will be stored in `example_quadruplet_prediction.csv`. The runtime will depend greatly on the characteristics of your system but should be under 1 minute. 
 
 # Training the model from scratch
-The data and optimal hyperparameters can be downloaded from https://zenodo.org/records/14216168 and must be extracted in the app folder.  
+The data and optimal hyperparameters can be downloaded from [Zenodo](/guides/content/editing-an-existing-page#modifying-front-matter](https://zenodo.org/records/14216168) and must be extracted in the app folder.  
 
 Then the model can be trained using  
 
