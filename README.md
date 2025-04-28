@@ -23,7 +23,7 @@ torchmetrics==0.10.0
 For the usage of our package, no particular Python package is provided. For the installation of Python on different operating systems the instructions can be found at https://www.python.org/downloads/. Once Python is installed the required libraries can be installed using the command `pip install -r requirements.txt`. The installation time will greatly depend on the time needed to download and install PyTorch with CUDA support, which could take up to one hour depending on the network being used.  
 
 # Generating predictions for Combination Therapies
-Predictions can be performed using the command `python3 predict.py --file {your_file.csv} --cuda {your_cuda_device_number}`. `your_file.csv` must contains columns `[SMILES_1, ..., SMILES_N, CONC1	,...,	CONCN, CELL_NAME]`. Where SMILES_X, CONC_X contains the canonical smiles and concentration of a drug present in the combination therapy, and CELL_NAME contains the name of one of the cell-lines of the NCI60 where the combination therapy will be tested. Each row corresponds to one combination therapy.  
+Predictions can be performed using the command `python3 predict.py --file {your_file.csv} --cuda {your_cuda_device_number}`. `your_file.csv` must contains columns `[SMILES_1, ..., SMILES_N, CONC1	,...,	CONCN, CELL_NAME]`. Where SMILES_X, CONCX contains the canonical smiles and concentration of a drug present in the combination therapy, and CELL_NAME contains the name of one of the cell-lines of the NCI60 where the combination therapy will be tested. Each row corresponds to one combination therapy.  
 
 The pre-trained models can be downloaded and extracted from https://zenodo.org/records/14216168  
 
@@ -95,11 +95,11 @@ Alternatively, we provide the hyperparameters optimization pipeline in a separat
 ```docker run --runtime=nvidia --gpus all  -v $(pwd)/studies:/app/studies -v $(pwd)/data:/app/data -e CUDA=0 panthera_optimize ```  
 
 
+CUDA denotes the CUDA device number  
+Additionally one can add -e SETTING=other_setting to train the model using a setting that's not the prediction of drug combinations -e DATA_PATH=yourfile.csv to train the model using a custom file  
+
 The output will be stored in studies/{setting}_new, and {setting}_new can be passed as an optional argument to train the model using the selected hyperparameters.   
 Note that this can take very long; several instances can be run in parallel, but training a single instance can take up to 2 days of computation.   
-
-CUDA denotes the CUDA device number  
-Additionally one can add -e SETTING=other_setting to train the model using a setting that's not the prediction of drug combinations -e DATA_PATH=yourfile.csv to train the model using a custom file   
 
 # Troubleshooting
 For running the models in containers, a CUDA-capable machine with Docker (https://docs.docker.com/engine/install/) is required.
