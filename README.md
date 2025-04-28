@@ -27,7 +27,7 @@ Predictions can be performed using the command `python3 predict.py --file {your_
 
 The pre-trained models can be downloaded and extracted from [Zenodo](/guides/content/editing-an-existing-page#modifying-front-matter](https://zenodo.org/records/14216168)  
 
-The output will be stored in {==your_file_prediction.csv==}, and an additional column, `prediction`, will contain the average predicted inhibitory effect of the ensemble.  
+The output will be stored in {*your_file_prediction.csv*}, and an additional column, `prediction`, will contain the average predicted inhibitory effect of the ensemble.  
 
 Additionally, it can be ran as a docker image:  
 first the image is built:  
