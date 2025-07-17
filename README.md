@@ -1,4 +1,4 @@
-Code for the publication "PanThera: Predicting the effect of Combination Therapy using Deep Neural Networks".  
+Code for the publication "PanThera: Predicting the effect of Combination Therapy using Deep Neural Networks", accepted in Briefings in Bioinformatics.
 
 # Overview
 PanThera aims at predicting arbitrary combination therapies. A pre-trained ensemble containing 10 replicas of PanThera trained on different subsets of the ALMANAC data, and an interface to generate predictions for arbitrary treatments are provided.  
